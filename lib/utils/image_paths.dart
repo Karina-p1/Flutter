@@ -1,6 +1,6 @@
-class ImagePaths{
-  static const baseUrl="assets/images";
+class ImagePaths {
+  static const baseUrl = "assets/images";
 
-  static const dogImage = "$baseUrl/dog.jpg";
-  static const profileImage = "$baseUrl/profile2.jpg";
+  static const profileImage = "$baseUrl/profile2.jpg"; // climbing photo
+  static const dogImage = "$baseUrl/dog.jpg"; // other asset
 }
