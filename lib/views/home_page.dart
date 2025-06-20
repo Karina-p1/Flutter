@@ -23,7 +23,38 @@ class HomePage extends StatelessWidget {
                   style: TextStyle(fontSize: 32, fontWeight: FontWeight.w800),
                 );
               }),
-              Text("this is the count")
+              Text("this is the count"),
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children:[
+                ElevatedButton(onPressed: (){c.decreaseCount();}, child: Text("Decrease")),
+                ElevatedButton(onPressed: (){c.resetCount();}, child: Text("Reset")),
+                ElevatedButton(onPressed: (){c.increaseCount();}, child: Text("Increase")),
+              ],
+              ),
+              SizedBox(
+                height: 50,
+              ),
+              InkWell(//Inkwell helps us to make obx widget tappable
+                onTap: (){
+                  c.toggleLikeStatus();
+                },
+                child: Obx((){
+                  if(c.isLiked.value==true){
+                    return  Icon(Icons.favorite,color: Colors.red,);
+                  }else{
+                    return  Icon(Icons.favorite_border,color: Colors.red);
+                  }
+                }),
+              ),
+            SizedBox(
+              height: 50,
+            ),
+              Container(
+                height: MediaQuery.of(context).size.height/2,
+                width: MediaQuery.of(context).size.width/2,
+                color: Colors.red,
+              ),
               // Obx((){
               //   return Text("karina");//in this text there is no any observable variable so it throws error Here, there's no observable, so you'll get an error like:"You are using Obx without any observable inside."
               // })
