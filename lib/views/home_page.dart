@@ -51,9 +51,12 @@ class HomePage extends StatelessWidget {
               height: 50,
             ),
               Container(
-                height: MediaQuery.of(context).size.height/2,
-                width: MediaQuery.of(context).size.width/2,
-                color: Colors.red,
+                height: Get.width/4,
+                width: Get.width/5,
+              ),
+              ElevatedButton(onPressed: (){
+                Get.snackbar("title", "This is a snackbar", backgroundColor: Colors.blue);
+              }, child: Text("Press for snackbar"),
               ),
               // Obx((){
               //   return Text("karina");//in this text there is no any observable variable so it throws error Here, there's no observable, so you'll get an error like:"You are using Obx without any observable inside."
