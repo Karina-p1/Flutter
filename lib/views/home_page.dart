@@ -1,6 +1,7 @@
 import 'package:demoapp/controllers/home_page_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'first_page.dart';
 //GetX is a package package is publicly available code which can be found in pub.dev
 class HomePage extends StatelessWidget {
   // Bring the HomePageController class into the view using Get.put
@@ -57,6 +58,13 @@ class HomePage extends StatelessWidget {
               ElevatedButton(onPressed: (){
                 Get.snackbar("title", "This is a snackbar", backgroundColor: Colors.blue);
               }, child: Text("Press for snackbar"),
+              ),
+              
+              ElevatedButton(
+                onPressed: (){
+                  Get.to(FirstPage());
+              },
+                  child: Text("Press for  first page"),
               ),
               // Obx((){
               //   return Text("karina");//in this text there is no any observable variable so it throws error Here, there's no observable, so you'll get an error like:"You are using Obx without any observable inside."
