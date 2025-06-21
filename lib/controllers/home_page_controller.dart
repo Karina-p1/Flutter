@@ -1,59 +1,39 @@
+import 'package:demoapp/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_debouncer/flutter_debouncer.dart';
 import 'package:get/get.dart';
 
 //variable declaration
 //logic work
 // api calls
 class HomePageController extends GetxController {
-  //for making the variable observable.
-  RxInt count = 0.obs;
+  RxBool isSearchFieldTap = false.obs;
+  TextEditingController sc = TextEditingController();
+  final Debouncer debouncer = Debouncer();
 
-  RxBool isLiked = true.obs;
-
-  void toggleLikeStatus() {
-    isLiked.value = !isLiked.value;
-  }
-
-  void increaseCount() {
-    count = count + 1;
-    print("the count is ${count}");
-  }
-
-  void decreaseCount() {
-    count = count - 1;
-    print("the count is ${count}");
-  }
-
-  void resetCount() {
-    count.value = 0;
-    print("the count is ${count}");
-  }
-
-  RxList pages =
-      [
-        {"icon": Icons.home, "label": "Home"},//0
-        {"icon": Icons.explore, "label": "Explore"},//1
-        {"icon": Icons.person, "label": "Profile"},//2
-        {"icon": Icons.settings, "label": "Settings"},//3
+  RxList<String> items =
+      ['Banana',
+        'Orange',
+        'Grapes',
+        'Pineapple',
+        'Mango',
+        'Watermelon',
+        'Strawberry',
+        'Blueberry',
+        'Peach',
       ].obs;
 
-  RxInt currentIndex=0.obs;
+  RxList filteredItems = [].obs;
+//aPPlE
+  void searchText(String value) {
+    filteredItems.clear();
+    for (var item in items) {
+      //apple
+      if (item.toLowerCase().contains(value.toLowerCase())) {
 
 
-  void changePage(int index){
-    currentIndex.value=index;
-  }
-
-  @override
-  void onInit(){
-    print("home page controller is called");
-    super.onInit();
-  }
-
-  @override
-  void dispose() {
-    print("home page controller is disposed");
-    // TODO: implement dispose
-    super.dispose();
+        filteredItems.add(item);
+      }
+    }
   }
 }

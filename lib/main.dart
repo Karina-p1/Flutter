@@ -1,7 +1,6 @@
 import 'package:demoapp/colors.dart';
 import 'package:demoapp/views/home_page.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,15 +9,7 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(themeMode: ThemeMode.system,
-
-        theme: ThemeData(
-            bottomNavigationBarTheme: BottomNavigationBarThemeData(
-              backgroundColor: Colors.green,
-
-            )
-        ),
-        home: HomePage());
+    return MaterialApp(home: HomePage());
   }
 }
 
