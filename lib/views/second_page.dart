@@ -5,20 +5,16 @@ class SecondPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final data = Get.arguments;
     return Scaffold(
       appBar: AppBar(
         title: Text("Second page"),
       ),
         body: Column(
           children: [
-            ElevatedButton(
-              onPressed: (){
-              Get.back();
-            },
-            child: Text("Press for second page"),
-            ),
+Text(data.toString())
           ],
-        )
+        ),
     );
   }
 }
