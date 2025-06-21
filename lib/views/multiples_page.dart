@@ -6,18 +6,28 @@ class MultiplesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int? args =
-    int.tryParse(Get.arguments);
+    int? args = int.tryParse(Get.arguments);
     return Scaffold(
       appBar: AppBar(),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.all(16),
-            child: Column(children: [
-              Text("The multiple of $num is${(args??0)*2}")
-            ]),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(16),
+          child: Column(
+            children: [
+              ListView.builder(
+                itemCount: 11,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return Text(
+                    "${args.toString()} * ${index.toString()} = ${index * args!}",
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
+                  );
+                },
+              ),
+            ],
           ),
         ),
-      );
-    }
+      ),
+    );
+  }
 }
