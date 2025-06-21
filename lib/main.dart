@@ -1,4 +1,5 @@
 import 'package:demoapp/views/home_page.dart';
+import 'package:demoapp/views/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'colors.dart'; // Custom color constants
@@ -13,6 +14,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //use get material app instead of material app in getx
-    return GetMaterialApp(home: HomePage());
+    return GetMaterialApp(home: LoginPage());
   }
 }
