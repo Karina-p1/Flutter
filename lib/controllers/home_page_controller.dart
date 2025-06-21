@@ -1,14 +1,22 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 import '../image_paths.dart';
 
-class HomePageController extends GetxController{
+class HomePageController extends GetxController {
+  //making the fruit list observable
+  RxList<String>fruits=['mango','banana','apple','peach'].obs;
+  //When we have to use and access Text field data
+  TextEditingController fruitName=TextEditingController();
 
-  Map product={
-    "imageUrl":ImagePaths.shoeImage,
-    "name":"Nike city",
-    "category":"shoe",
-    "price":"Rs.12000",
-    "detail":"A foam midsole and foam and rubber outsole pods provide lightweight comfort and durability."
-  };
+  void addFruits(){
+    if(fruitName.text.isNotEmpty){
+      fruits.add(fruitName.text);
+    }
+  }
+  void deleteFruits(int index){
+    if(index<fruits.length){
+      fruits.removeAt(index);
+    }
+  }
 }

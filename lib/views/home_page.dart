@@ -16,40 +16,77 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Home Page")),
-      body: SingleChildScrollView(
+      body: Center(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            InkWell(
-              onTap: (){
-                Get.to(()=>DetailsPage(),arguments: c.product);
+            Obx((){
+              return ListView.builder(
+                shrinkWrap: true,
+                itemCount: c.fruits.length,
+                itemBuilder: (context, index) {
+                  String fruit = c.fruits[index];
+                  return ListTile(
+                    title: Text(fruit),
+                    leading: Icon(Icons.abc),
+                    trailing: InkWell(
+                        onTap: (){
+                          c.deleteFruits(index);
+                        },
+                  child: Icon(Icons.delete)),
+                  );
+                },
+              );
+            }),
+
+            SizedBox(height: 40),
+            ElevatedButton(
+              onPressed: () {
+                Get.bottomSheet(//function provided by flutter
+                  Container(
+                    height: Get.height / 2,
+                    width: Get.width,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    padding: EdgeInsets.all(16),
+                     child: Column(
+                       crossAxisAlignment: CrossAxisAlignment.start,
+                       children: [
+                         Text(
+                           "Add a fruit",
+                           style: TextStyle(
+                               fontSize: 22,
+                             fontWeight: FontWeight.w700,
+                           ),
+                         ),
+                         SizedBox(
+                           height: 16,
+                         ),
+                         TextField(
+                           controller: c.fruitName,//widget used for taking user input
+                           decoration: InputDecoration(
+                             enabledBorder: OutlineInputBorder(
+                               borderSide: BorderSide(color: Colors.black)
+                             ),
+                               focusedBorder: OutlineInputBorder(
+                           borderSide: BorderSide(color: Colors.black)
+                         )
+                           ),
+                         ),
+                         SizedBox(
+                           height: 16,
+                         ),
+                         ElevatedButton(onPressed: (){
+                        // print(c.fruitName.text);
+                              c.addFruits();
+                         }, child: Text("Save"))
+                       ],
+                     ),
+                  ),
+                );
               },
-              child: Container(
-                padding: EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Image.asset(
-                      c.product['imageUrl'],
-                      height: Get.height / 3,
-                      width: Get.width / 2,
-                      fit: BoxFit.fill,
-                    ),
-                    Text(
-                      c.product["name"],
-                      style: TextStyle(fontSize:22, fontWeight: FontWeight.w600),
-              ),
-              Text(
-                c.product["category"],
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600,color:Colors.grey),
-              ),
-                    Text(
-                      c.product['price'],
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600,color:Colors.black),
-                    ),
-                  ],
-                ),
-              ),
+              child: Text("Press me"),
             ),
           ],
         ),
