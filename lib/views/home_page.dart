@@ -1,42 +1,56 @@
 import 'package:demoapp/controllers/home_page_controller.dart';
+import 'package:demoapp/views/error_page.dart';
+import 'package:demoapp/views/explore_page.dart';
+import 'package:demoapp/views/landing_page.dart';
+import 'package:demoapp/views/profile_page.dart';
+import 'package:demoapp/views/settings_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-//GetX is a package package is publicly available code which can be found in pub.dev
+
 class HomePage extends StatelessWidget {
-  // Bring the HomePageController class into the view using Get.put
-  final HomePageController c = Get.put(HomePageController());
+  //to bring home page controller in the view
+  final c = Get.put((HomePageController()));
+
   HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Home Page")),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              //to reflect observable variable changes If you want to observe changes in a variable using Obx, you must always wrap the widget (that displays or depends on that variable) inside the Obx function.
-              Obx(() {
-                return Text(
-                  c.count.value.toString(),
-                  style: TextStyle(fontSize: 32, fontWeight: FontWeight.w800),
-                );
-              }),
-              Text("this is the count")
-              // Obx((){
-              //   return Text("karina");//in this text there is no any observable variable so it throws error Here, there's no observable, so you'll get an error like:"You are using Obx without any observable inside."
-              // })
-            ],
-          ),
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+      ),
+      bottomNavigationBar: Obx(
+            () => BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Colors.black,
+          currentIndex: c.currentIndex.value,
+          onTap: (index) {
+            c.changePage(index);
+          },
+          selectedItemColor: Colors.white,
+          unselectedItemColor: Colors.grey,
+          items: List.generate(c.pages.length, (index) {
+            final page = c.pages[index];
+            return BottomNavigationBarItem(
+              icon: Icon(page["icon"]),
+              label: page["label"],
+            );
+          }),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          c.increaseCount();
-        },
-        child: Icon(Icons.add),
-      ),
+      body: Obx((){
+        if(c.currentIndex.value==0){
+          return LandingPage();
+        }else if(c.currentIndex.value==1){
+          return ExplorePage();
+        }else if(c.currentIndex.value==2){
+          return ProfilePage();
+        }else if(c.currentIndex.value==3){
+          return SettingsPage();
+        }else{
+          return ErrorPage();
+        }
+      }),
     );
   }
 }
